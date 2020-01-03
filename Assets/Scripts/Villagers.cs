@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Villagers : MonoBehaviour
 {
+    public ParticleSystem particleSystem;
     public float minMoveSpeed;
     public float maxMoveSpeed;
     public float maxWaitTime;
@@ -56,6 +57,16 @@ public class Villagers : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         canMove = true;
 
+    }
+
+    public void BlowUp ()
+    {
+        
+        ParticleSystem p = Instantiate(particleSystem,transform.position,Quaternion.identity);
+        p.startColor = spriteRenderer.color;
+        p.textureSheetAnimation.SetSprite(0, spriteRenderer.sprite);
+        p.Play();
+        Destroy(gameObject);
     }
 
 }

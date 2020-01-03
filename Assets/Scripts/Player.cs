@@ -4,21 +4,33 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour
 {
     public float speed = 100;
     public LayerMask villagerLayer;
+
+    public AudioClip correctSelectionSound;
+    public AudioClip incorrectSelectionSound;
     Vector2 movementDirection;
     Rigidbody2D rigidbody;
     Vector2 hitOrigin;
     Collider2D[] colliders;
     GameManager gameManager;
+    AudioSource audioSource;
 
     void Start()
     {
         gameManager = GameManager.instance;
         rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.gravityScale = 0;
+        audioSource = GetComponent<AudioSource>();
+
+        if (gameManager.level > 1)
+        {
+            audioSource.clip = correctSelectionSound;
+            audioSource.Play();
+        }
     }
 
     void Update()
@@ -41,13 +53,16 @@ public class Player : MonoBehaviour
                 {
                     if (colliders[i].GetComponent<Villagers>() == enemy)
                     {
+                       
                         gameManager.NextLevel();
-                        print("Hit Enemy");
+
                     }
                     else
                     {
+                        audioSource.clip = incorrectSelectionSound;
+                        audioSource.Play();
                         gameManager.IncrementStrikes();
-                        Destroy(colliders[i].gameObject);
+                        colliders[i].GetComponent<Villagers>().BlowUp();
                     }
                 }
             }         

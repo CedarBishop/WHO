@@ -94,19 +94,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e96fb0bf4299d84f9da4a5a5a0e80f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 3684044880917262105, guid: 9ac1dd79691b9b94184131f2bfad53a9,
+    type: 3}
   minMoveSpeed: 1
   maxMoveSpeed: 10
   maxWaitTime: 0.5
   minWaitTime: 3
-  minX: -5
-  minY: -5
-  maxX: 5
-  maxY: 5
+  minX: -9.5
+  minY: -9.5
+  maxX: 9.5
+  maxY: 9.5
   sprites:
   - {fileID: 21300000, guid: d98150c1c36322a49a8c215d689ab01b, type: 3}
   - {fileID: 21300000, guid: b53c9d68d7f0da9468139e4a8d7923b8, type: 3}
   - {fileID: 21300000, guid: 9bb0276ac75b3c14c8531ac20f726fc9, type: 3}
-  - {fileID: 21300000, guid: b8856383d765ffc4eb8d9289fa95b5fb, type: 3}
+  - {fileID: 21300000, guid: 2f1bf9eaa9cc4be4298a694f74492d73, type: 3}
 --- !u!61 &2102218874539047335
 BoxCollider2D:
   m_ObjectHideFlags: 0

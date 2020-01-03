@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
     public Image targetImage;
     public Text levelText;
     public Text timerText;
+    public Image strikesImage;
 
+
+    public string mainMenuScene = "MainMenu";
     SpriteRenderer enemySpriteRenderer;
     GameManager gameManager;
 
     float timer;
     bool hasInitialized;
+    int strikes;
 
     IEnumerator Start()
     {
@@ -28,6 +33,7 @@ public class GameMenu : MonoBehaviour
         targetImage.color = enemySpriteRenderer.color;
         UpdateUI();
         hasInitialized = true;
+        strikesImage.fillAmount = 0.0f;
     }
 
     void Update ()
@@ -53,7 +59,24 @@ public class GameMenu : MonoBehaviour
     
     void UpdateUI ()
     {
-        print( gameManager.GetStrikes());
+        strikes = gameManager.GetStrikes();
+        if (strikes == 1)
+        {
+            strikesImage.fillAmount = 0.34f;
+        }
+        else if (strikes == 2)
+        {
+            strikesImage.fillAmount = 0.67f;
+        }
+        else if (strikes == 3)
+        {
+            strikesImage.fillAmount = 1.0f;
+        }
         levelText.text = "Level " + gameManager.level;
+    }
+
+    public void ReturnToMainMenu ()
+    {
+        SceneManager.LoadScene(mainMenuScene);
     }
 }
